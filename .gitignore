@@ -1,4 +1,24 @@
+# Go test/coverage artifacts
 cover.out
 coverage.out
 *.test
 *.out
+
+# Local binaries
+bin/
+
+# IDE / editor scratch
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Agent / AI tooling artifacts (must never enter the public repo)
+.agentrc/
+.claude/
+.nanite/
+agentrc.yaml
+agentrc.yml
+CLAUDE.md
+AGENTS.md
+AUDIT_RESULTS.md

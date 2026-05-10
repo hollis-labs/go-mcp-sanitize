@@ -13,25 +13,40 @@ Some agent harnesses (Claude Code among others) occasionally emit a stray
 block — *inside* the value of a free-text MCP tool-call argument. The MCP
 server parses the call correctly, but stores the polluted JSON.
 
-Live evidence:
-[memory revision `01KR74F29P9Y80C384JDJ3QYQG`](https://github.com/hollis-labs/vanta-conduit)
-where `payload_summary` ended with literal
-`</payload_summary>\n<parameter name="payload_body">## Decision\n\n…<full body>`
-while the separate `payload_body` field was already correctly populated. Cost:
-every polluted write became 2 calls (write + supersede), happening across
-multiple sessions per day.
+Concretely, the `payload_summary` field of a memory-write tool call ends up
+looking like:
+
+```
+…concluding sentence.</payload_summary>
+<parameter name="payload_body">## Decision
+
+…full body content…</parameter>
+```
+
+while the *separate* `payload_body` field is already correctly populated by
+the same call. Each polluted write then needs a second supersede call to
+overwrite the bad copy — observable as a ~2× write-amplification on any
+free-text tool over a long session.
 
 This library detects four common pollution shapes and produces a cleaned
 `args` map. The library itself is zero-side-effect (no logs, no globals).
 Telemetry is the responsibility of the optional middleware.
 
+## Status
+
+Pre-1.0 / experimental. The public API surface is small and stable, but
+v0.x bumps may still carry breaking changes — they will be called out
+loudly in [`CHANGELOG.md`](./CHANGELOG.md).
+
 ## Install
 
 ```bash
-go get github.com/hollis-labs/go-mcp-sanitize@v0.1.0
+go get github.com/hollis-labs/go-mcp-sanitize@latest
 ```
 
-Floor versions: Go 1.24, `github.com/mark3labs/mcp-go` v0.47.0.
+Floor versions: Go 1.26.2, `github.com/mark3labs/mcp-go` v0.47.0.
+
+Runnable demos live under [`examples/`](./examples).
 
 ## Use the middleware (5 lines)
 
@@ -113,8 +128,8 @@ type Report struct {
 func (r Report) Changed() bool
 ```
 
-The API surface is locked at v0.1.0 — Phase 2 of the rollout (vanta-conduit,
-clockwork-manifold, agent-mux integration) imports it as-is.
+The API surface is locked — downstream MCP-server consumers can import it
+as-is and follow standard semver guarantees for any future v0.x bump.
 
 ## Out of scope
 

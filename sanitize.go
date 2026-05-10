@@ -1,16 +1,3 @@
-// Package mcpsanitize cleans malformed Anthropic tool-call XML that leaks
-// into MCP free-text parameter VALUES.
-//
-// Some agent harnesses occasionally emit a stray `</PARAM_NAME>` close-tag —
-// or a full `<parameter name="OTHER">…</parameter>` block — inside the value
-// of a free-text MCP tool-call argument. The MCP server parses the call
-// correctly, but stores the polluted JSON.  This package detects four common
-// pollution shapes and produces a cleaned `args` map that callers can hand to
-// their normal handler logic.
-//
-// The library itself is zero-side-effect: no logging, no I/O, no globals.
-// Telemetry is the responsibility of the optional [Middleware] adapter for
-// `github.com/mark3labs/mcp-go`.
 package mcpsanitize
 
 import (
