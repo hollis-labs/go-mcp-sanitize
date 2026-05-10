@@ -175,7 +175,7 @@ func TestPattern2_DoesNotOverwriteExistingCleanCopy(t *testing.T) {
 	}
 	// The cleaned summary should end with the original sentence — not
 	// trailing whitespace, not markup.
-	if !strings.HasSuffix(gotSummary, "two parallel consumers.") {
+	if !strings.HasSuffix(gotSummary, "with no time for parallel migration.") {
 		t.Fatalf("cleaned summary doesn't end at the natural sentence boundary: %q", gotSummary[len(gotSummary)-80:])
 	}
 	// At least one dropped fragment should be recorded.

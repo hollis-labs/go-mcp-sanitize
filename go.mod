@@ -1,6 +1,6 @@
 module github.com/hollis-labs/go-mcp-sanitize
 
-go 1.24
+go 1.26.2
 
 require github.com/mark3labs/mcp-go v0.47.0
 
