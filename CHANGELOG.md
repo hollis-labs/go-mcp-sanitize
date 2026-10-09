@@ -1,5 +1,15 @@
 # Changelog
 
+## Repository retirement — 2026-10-09
+
+### Changed
+
+- Maintained development moved to [github.com/hollis-labs/libs/plugin-mcp/go-mcp-sanitize](https://github.com/hollis-labs/libs/tree/plugin-mcp%2Fv0.1.1/plugin-mcp/go-mcp-sanitize) in
+  `github.com/hollis-labs/libs/plugin-mcp@v0.1.1` (`plugin-mcp/v0.1.1`).
+- This standalone repository is retired after the replacement release was
+  verified fetchable with successful module CI. README migration instructions
+  identify the new import prefix; existing standalone tags and history are preserved.
+
 All notable changes to `github.com/hollis-labs/go-mcp-sanitize` are documented
 in this file. The project follows [Semantic Versioning](https://semver.org/).
 
