@@ -1,5 +1,22 @@
 # go-mcp-sanitize
 
+## Maintenance moved to `github.com/hollis-labs/libs/plugin-mcp`
+
+This standalone repository is retired. Maintained source and documentation are
+in [github.com/hollis-labs/libs/plugin-mcp/go-mcp-sanitize](https://github.com/hollis-labs/libs/tree/plugin-mcp%2Fv0.1.1/plugin-mcp/go-mcp-sanitize), released in **`plugin-mcp/v0.1.1`**.
+Install the replacement module:
+
+```sh
+go get github.com/hollis-labs/libs/plugin-mcp@v0.1.1
+```
+
+Replace the `github.com/hollis-labs/go-mcp-sanitize` import prefix with
+`github.com/hollis-labs/libs/plugin-mcp/go-mcp-sanitize`, retaining the package subpath. Review the replacement documentation
+for any API changes before migrating. Existing standalone tags and history remain
+available; old module pins do not automatically redirect to the new module.
+
+The documentation below describes historical standalone usage.
+
 [![Go Reference](https://pkg.go.dev/badge/github.com/hollis-labs/go-mcp-sanitize.svg)](https://pkg.go.dev/github.com/hollis-labs/go-mcp-sanitize)
 
 A small Go module for cleaning malformed Anthropic tool-call XML that leaks
